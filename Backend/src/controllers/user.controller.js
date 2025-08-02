@@ -3,6 +3,7 @@ import  uploadOnClodinary from "../utils/cloudinary.js"
 import apiError from "../utils/apiError.js"
 import apiResponse from "../utils/apiResponse.js"
 import { User } from "../models/user.model.js"
+import jwt from "jsonwebtoken"
 const registerUser  = asyncHandler(async(req,res)=>{
       const {name,email,bio,password} = req.body
       if(
@@ -27,7 +28,7 @@ const registerUser  = asyncHandler(async(req,res)=>{
             avatar:response?.url,
             password,
       })
-      return res.status(200).json(
+      return res.status(201).json(
             new apiResponse(201,"User successfully register")
       )
 })
@@ -64,4 +65,58 @@ const loginUser = asyncHandler(async(req,res)=>{
             new apiResponse(200,"User successfully login",loggedInUser)
       )
 })
-export {registerUser,loginUser}
+const logoutUser = asyncHandler(async(req,res)=>{
+     const userId = req.user._id
+      if(!userId){
+            throw new apiError(401,"Bad request")
+      }
+      await User.findByIdAndUpdate(
+            userId,{
+            $unset:{
+                 refreshToken:1
+            }
+            },
+           {new:true}
+      )
+      const options ={
+            httpOnly:true,
+            secure:true,
+      }
+      return res.status(200)
+      .clearCookie("accessToken",options)
+      .clearCookie("refreshToken",options)
+      .json(
+            new apiResponse(200,"User successfully logout")
+      )
+})
+const refreshAccessToken = asyncHandler(async(req,res)=>{
+      const user_refreshToken = req.headers.authorization || req.cookies.refreshToken
+      if(!user_refreshToken){
+            throw new apiError(401,"Bad request")
+      }
+      const decoded = await jwt.verify(user_refreshToken, process.env.REFRESH_SECRET_KEY)
+      const userId = decoded._id
+      const user = await User.findById(userId)
+      if(!user){
+            throw new apiError(401,"Invalid Refresh token")
+      }
+      if(user.refreshToken !== user_refreshToken){
+            throw new apiError(401,"Invalid Refresh token")
+      }
+      const accessToken = await user.generateAccessToken()
+      const refreshToken = await user.generateRefreshToken()
+      user.refreshToken = refreshToken
+      await user.save({validateBeforeSave:false})
+      const options = {
+            httpOnly:true,
+            secure:true,
+      }
+      return res.status(201)
+      .cookie("accessToken",accessToken,options)
+      .cookie("refreshToken",refreshToken,options)
+      .json(
+           new apiResponse(201,"Token regenerated successfully")
+      )
+
+})
+export {registerUser,loginUser,logoutUser,refreshAccessToken}

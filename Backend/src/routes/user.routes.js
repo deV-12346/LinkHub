@@ -1,6 +1,7 @@
 import express from "express"
 import { upload } from "../middlewares/multer.middleware.js"
-import {registerUser,loginUser} from "../controllers/user.controller.js"
+import {registerUser,loginUser, logoutUser, refreshAccessToken} from "../controllers/user.controller.js"
+import checkAuth from "../middlewares/checkauth.middleware.js"
 const userRouter  = express.Router()
 userRouter.post("/register",upload.fields([
       {
@@ -9,4 +10,6 @@ userRouter.post("/register",upload.fields([
       }
 ]),registerUser)
 userRouter.post("/login",loginUser)
+userRouter.post("/logout",checkAuth,logoutUser)
+userRouter.post("/regenerateAccessToken",refreshAccessToken)
 export default userRouter

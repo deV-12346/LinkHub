@@ -1,6 +1,6 @@
-import { User } from "../models/user.model";
-import apiError from "../utils/apiError";
-import asyncHandler from "../utils/asyncHandler";
+import { User } from "../models/user.model.js";
+import apiError from "../utils/apiError.js";
+import asyncHandler from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken"
 const checkAuth = asyncHandler(async (req, res, next) => {
       try {
@@ -10,7 +10,7 @@ const checkAuth = asyncHandler(async (req, res, next) => {
             }
             const decoded = await jwt.verify(token, process.env.ACCESS_SECRET_KEY)
             const userId = decoded._id
-            const user = User.findById(userId)
+            const user = await User.findById(userId)
             if(!user){
                   throw new apiError(400,"User not found")
             }
