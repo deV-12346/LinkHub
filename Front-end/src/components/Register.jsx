@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from "axios"
 import toast from "react-hot-toast"
 import { useNavigate,Link } from 'react-router-dom'
+import axiosInstance from '../../axiosIntance'
 const Register = () => {
   const [values,setValues] = useState({
     name:"",
@@ -27,7 +28,7 @@ const Register = () => {
   const handleSubmit = async (e) =>{
     try {
       e.preventDefault()
-      const response = await axios.post("http://localhost:5000/api/user/register",formData)
+      const response = await axiosInstance.post("/user/register",formData)
       if(response.data.success){
         console.log(response.data.message)
         toast.success(response.data.message)
