@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Navabar from './Navabar'
+import Navbar from '../components/Navbar.jsx'
 import { useAppContext } from '../context/appContext'
-import axiosInstance from '../../axiosIntance'
+import axiosInstance from '../../axiosIntance.js'
 import { useEffect } from 'react'
 import PostCard from './PostCard'
 import toast from "react-hot-toast"

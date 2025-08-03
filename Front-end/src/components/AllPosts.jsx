@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useAppContext } from '../context/appContext'
-import axiosInstance from '../../axiosIntance'
+import axiosInstance from '../../axiosIntance.js'
 import PostCard from './PostCard'
 
 const AllPosts = () => {

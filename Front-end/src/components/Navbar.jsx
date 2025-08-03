@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import { useAppContext } from '../context/appContext'
 import { useNavigate ,Link, NavLink} from 'react-router-dom'
 
-const Navabar = () => {
+const Navbar = () => {
       const {user,setUser} = useAppContext()
       const navigate  = useNavigate()
       const handleClick = async(e) =>{
@@ -51,4 +51,4 @@ const Navabar = () => {
   )
 }
 
-export default Navabar
+export default Navbar
