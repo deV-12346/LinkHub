@@ -2,7 +2,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const axiosInstance = axios.create({
-  baseURL:"https://linkhub-3lrf.onrender.com/api",
+  baseURL: "http://localhost:5000/api",
+  // baseURL:"https://link-hub-utie.vercel.app/api",
   withCredentials: true,
 });
 let isRefreshing = false;

@@ -56,7 +56,8 @@ const loginUser = asyncHandler(async(req,res)=>{
       
       const options = {
             httpOnly:true,
-            secure:true
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: "None"
       }
       const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
       return res.status(200)
@@ -80,7 +81,8 @@ const logoutUser = asyncHandler(async(req,res)=>{
       )
       const options ={
             httpOnly:true,
-            secure:true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: "None"
       }
       return res.status(200)
       .clearCookie("accessToken",options)
@@ -109,7 +111,8 @@ const refreshAccessToken = asyncHandler(async(req,res)=>{
       await user.save({validateBeforeSave:false})
       const options = {
             httpOnly:true,
-            secure:true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: "None"
       }
       return res.status(201)
       .cookie("accessToken",accessToken,options)

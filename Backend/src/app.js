@@ -9,7 +9,8 @@ app.use(express.json())
 app.use(cookieparser())
 app.use(express.static("Public"))
 app.use(cors({
-     origin:"https://link-hub-wine-pi.vercel.app",
+      origin:"http://localhost:5173",
+//      origin:"https://link-hub-wine-pi.vercel.app",
      credentials:true
 }))
 app.get("/",(req,res)=>{
