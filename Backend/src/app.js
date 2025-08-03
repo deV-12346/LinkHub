@@ -12,6 +12,10 @@ app.use(cors({
      origin:"https://link-hub-wine-pi.vercel.app",
      credentials:true
 }));
+app.options("*", cors({
+  origin: "https://link-hub-wine-pi.vercel.app",
+  credentials: true
+}));
 app.get("/",(req,res)=>{
       res.send("Hello from routes")
 })
