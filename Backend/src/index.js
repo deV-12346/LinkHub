@@ -4,9 +4,7 @@ import app from "./app.js"
 dotenv.config()
 connectDb()
 .then(()=>{
-      app.listen(process.env.PORT || 5000,()=>{
-            console.log(`Server started on ${process.env.PORT}`)
-      })   
+      console.log(`Db connected`)
 })
 .catch((err)=>{
       console.log("Something went wrong",err.message)
