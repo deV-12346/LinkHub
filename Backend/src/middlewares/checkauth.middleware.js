@@ -17,7 +17,12 @@ const checkAuth = asyncHandler(async (req, res, next) => {
             req.user = decoded
             next()
       } catch (error) {
-            throw new apiError(400, error?.message)
+            if (error.name === "TokenExpiredError") {
+             throw new apiError(401, "Token has expired. Please login again.");
+            }
+            else{
+                  throw new apiError(400, error?.message)
+            }
       }
 
 })

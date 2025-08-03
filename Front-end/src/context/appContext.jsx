@@ -1,14 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { createContext } from "react";
 
-const appContext = createContext()
+const AppContext = createContext()
 export const AppProvider = ({children}) =>{
-      const name = "Anku"
-      const value = {name}
+      const [user,setUser] = useState(JSON.parse(localStorage.getItem("user")) || null)
+      const [posts,setposts] = useState([])
+      const [post,setPost] = useState("")
+      const value = {user,setUser,posts,setposts,post,setPost}
       return(
-        <appContext.Provider value={value}>
+        <AppContext.Provider value={value}>
             {children}
-        </appContext.Provider>
+        </AppContext.Provider>
       )
 }
-export const useAppContext = () => useContext(appContext)
+export const useAppContext = () => useContext(AppContext)

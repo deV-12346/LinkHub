@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken"
 const registerUser  = asyncHandler(async(req,res)=>{
       const {name,email,bio,password} = req.body
       if(
-            [name,email,bio,password].some((field)=>field.trim() === "")
+            [name,email,bio,password].some((field)=>field.trim() == "")
       ){
             throw new apiError(400,"All fields are required")
       }
@@ -67,9 +67,9 @@ const loginUser = asyncHandler(async(req,res)=>{
 })
 const logoutUser = asyncHandler(async(req,res)=>{
      const userId = req.user._id
-      if(!userId){
-            throw new apiError(401,"Bad request")
-      }
+      // if(!userId){
+      //       throw new apiError(401,"Bad request")
+      // }
       await User.findByIdAndUpdate(
             userId,{
             $unset:{
