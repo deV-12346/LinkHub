@@ -4,6 +4,8 @@ import apiError from "../utils/apiError.js"
 import apiResponse from "../utils/apiResponse.js"
 import { User } from "../models/user.model.js"
 import jwt from "jsonwebtoken"
+import dotenv from "dotenv";
+dotenv.config();
 const registerUser  = asyncHandler(async(req,res)=>{
       const {name,email,bio,password} = req.body
       if(
