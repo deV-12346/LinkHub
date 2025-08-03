@@ -2,8 +2,8 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import MyProfile from './pages/MyProfile'
-import Login from './components/login'
-import Register from './components/register'
+import Login from './components/Login'
+import Register from './components/Register'
 import { Toaster } from 'react-hot-toast'
 const App = () => {
 
