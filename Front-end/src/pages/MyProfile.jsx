@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar.jsx'
 import { useAppContext } from '../context/appContext'
 import axiosInstance from '../../axiosIntance.js'
 import { useEffect } from 'react'
-import PostCard from './PostCard'
+import PostCard from '../components/PostCard.jsx'
 import toast from "react-hot-toast"
 const MyProfile = () => {
   const {user} = useAppContext()
