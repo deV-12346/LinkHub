@@ -5,6 +5,8 @@ import MyProfile from './pages/MyProfile'
 import Login from './components/Login'
 import Register from './components/Register'
 import { Toaster } from 'react-hot-toast'
+import UserProfile from './components/UserProfile'
+import ProtectedRoutes from './components/ProtectedRoutes'
 const App = () => {
 
   return (
@@ -12,9 +14,12 @@ const App = () => {
       <Toaster />
       <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/my-profile' element={<MyProfile/>}/>
+        <Route path='/my-profile' element={<ProtectedRoutes>
+           <MyProfile/>
+         </ProtectedRoutes> }/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
+         <Route path='/:id' element={<UserProfile/>}/>
       </Routes>
     </div>
   )

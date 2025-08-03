@@ -90,7 +90,7 @@ const logoutUser = asyncHandler(async(req,res)=>{
       )
 })
 const refreshAccessToken = asyncHandler(async(req,res)=>{
-      const user_refreshToken = req.headers.authorization || req.cookies.refreshToken
+      const user_refreshToken = req.body || req.cookies.refreshToken
       if(!user_refreshToken){
             throw new apiError(401,"Bad request")
       }

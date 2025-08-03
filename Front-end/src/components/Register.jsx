@@ -49,7 +49,7 @@ const Register = () => {
   }
   return (
     <div className='flex justify-center items-center bg-gray-400 h-screen md:h-180 w-full'>
-     <div className='bg-white rounded h-auto w-90 md:w-110  py-5'>
+     <div className='bg-white rounded h-auto w-80 md:w-110  py-5'>
         <h1 className='text-2xl  font-medium text-center'>
           Register with <span className='text-red-500 font-bold'>L</span>
           ink

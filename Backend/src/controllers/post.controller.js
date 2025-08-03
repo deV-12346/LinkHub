@@ -11,10 +11,12 @@ const userPost = asyncHandler(async(req,res)=>{
       if(!user){
             throw new apiError(401,"User not found")
       }
-      await Post.create({
+      const createdPost = await Post.create({
             author:userId,
             content:post
      })
+      user.posts.push(createdPost._id)
+      await user.save()
      return res.status(200).json(
       new apiResponse(200,"Content Posted",{})
      )
@@ -28,8 +30,19 @@ const fecthAllPosts = asyncHandler(async(req,res)=>{
 const fectchUserPosts = asyncHandler(async(req,res)=>{
       const userId = req.user._id
       const posts = await Post.find({author:userId}).populate("author","name email avatar")
+      .select("-password -refreshToken")
       return res.status(200).json(
             new apiResponse(200,"User Posts fetched",posts)
       )
 })
-export {userPost,fecthAllPosts,fectchUserPosts}
+const selectedUser = asyncHandler(async(req,res)=>{
+      const {id} = req.query
+      const user = await User.findById(id).populate("posts","content")
+      if(!user){
+            throw new apiError(401,"User not found")
+      }
+      return res.status(200).json(
+            new apiResponse(200,"Selected user profile fecthed",user)
+      )
+})
+export {userPost,fecthAllPosts,fectchUserPosts,selectedUser}

@@ -23,15 +23,15 @@ const MyProfile = () => {
   },[])
   return (
     <div>
-      <Navabar/>
+      <Navbar/>
       <div className='px-5 h-auto w-full py-5 '>
         <div className='flex justify-center gap-3 md:gap-20 items-center h-60 w-full px-3 md:px-10 py-3'>
-          <img src={user.avatar} alt="user-img" className='w-20 md:w-40 h-20 md:h-40 rounded-full object-cover' />
+          <img src={user?.avatar} alt="user-img" className='w-20 md:w-40 h-20 md:h-40 rounded-full object-cover' />
           <div className='text-center'>
-            <h1 className='text-xl md:text-4xl font-mono text-gray-500'>{user.name}</h1>
-            <h1 className='text-xl md:text-2xl font-medium text-gray-500 flex'>
-            {user.email}</h1>
-            <h1 className='text-xl  font-medium text-gray-500'>Bio :{user.bio}</h1>
+            <h1 className='text-xl md:text-4xl font-mono text-gray-500'>{user?.name}</h1>
+            <h1 className='text-xl md:text-2xl font-mono text-gray-500'>
+            {user?.email}</h1>
+            <h1 className='text-xl font-mono  text-gray-500'>Bio:{user?.bio}</h1>
           </div>
         </div>
         {

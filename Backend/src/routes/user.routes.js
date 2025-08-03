@@ -11,5 +11,5 @@ userRouter.post("/register",upload.fields([
 ]),registerUser)
 userRouter.post("/login",loginUser)
 userRouter.post("/logout",checkAuth,logoutUser)
-userRouter.post("/regenerateAccessToken",refreshAccessToken)
+userRouter.post("/refresh-token",refreshAccessToken)
 export default userRouter

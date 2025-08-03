@@ -16,7 +16,7 @@ const Navbar = () => {
                         localStorage.removeItem("user")
                         setTimeout(()=>{
                           navigate("/login")
-                        },3000)
+                        },500)
                   }
             } catch (error) {
                   toast.error(error?.response?.data?.message)
@@ -32,9 +32,10 @@ const Navbar = () => {
         <nav className='flex gap-5 md:gap-10'>
             <NavLink className={({isActive})=> isActive ? "text-white underline" :
              "font-medium hover:scale-110 transition-all ease-in-out delay-500 duration-500 hover:text-red-400"} to="/">Home</NavLink>
-            <NavLink className={({isActive}) => isActive ? "text-white underline" 
+            {user && <NavLink className={({isActive}) => isActive ? "text-white underline" 
             : "font-medium hover:scale-110 transition-all ease-in-out delay-500 duration-500 hover:text-red-400"} to="/my-profile">My Profile</NavLink>
-        </nav>
+            }
+            </nav>
         <div>
         {
             user ? 
