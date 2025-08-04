@@ -6,12 +6,10 @@ import { AppProvider } from './context/appContext.jsx'
 import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     
      <AppProvider>
       <BrowserRouter>
        <App />
       </BrowserRouter>
-     </AppProvider>
-  </StrictMode>,
+     </AppProvider>,
 )

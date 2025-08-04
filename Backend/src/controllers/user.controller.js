@@ -15,7 +15,7 @@ const registerUser  = asyncHandler(async(req,res)=>{
       }
       const user = await User.findOne({email})
       if(user){
-            throw new apiError(409,"User already exits")
+            throw new apiError(400,"User already exits")
       }
       const avatar = req.files?.avatar[0]?.path;
       if(!avatar){
